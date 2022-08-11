@@ -16,11 +16,10 @@ productos.push(new Producto("Campera", 600, 4, 'https://assets.adidas.com/images
 const listaProductos = document.getElementById('seccion-productos')
 const modalContainer = document.querySelector('#modal-container')
 const modal = document.querySelector('#modal')
-const modalContainer2 = document.querySelector('#modal-container-2')
-const modal2 = document.querySelector('#modal-2')
 const cerrarModal = document.querySelector('#modal-close')
-const endBuy = document.querySelector('#end-buy')
-const btn2 = document.querySelector('#btn2')
+cerrarModal.addEventListener('click', () => {
+    modalContainer.classList.remove('modal-container-active')
+})
 for (const producto of productos) {
     const article = document.createElement('article')
     article.className = 'item'
@@ -35,19 +34,34 @@ for (const producto of productos) {
     btn1.addEventListener('click', () => {
         modalContainer.classList.add('modal-container-active')
         carrito.push(producto)
-    })
-    cerrarModal.addEventListener('click', () => {
-        modalContainer.classList.remove('modal-container-active')
-    })
-    endBuy.addEventListener('click', () => {
-        modalContainer2.classList.add('modal-container-active-2')
-        valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio; }, 0);
-        modal2.innerHTML = ` <h1> El valor total es $${valorTotal} </h1>`
-        modal2.append(btn2)
-    })
-    btn2.addEventListener('click', () => {
-        modalContainer2.classList.remove('modal-container-active-2')
+        localStorage.setItem('carrito', JSON.stringify(carrito))
     })
 }
-
+const sectionCarrito = document.querySelector('#cart-seccion')
+const carritoContainer = document.querySelector('#carrito-container')
+const carritoDiv = document.querySelector('#carrito')
+const carritoList = document.querySelector('#carritoList');
+const btn3 = document.createElement('button')
+btn3.id = 'openCarrito'
+btn3.innerHTML = `<img class="cart" src="./img/shopping_cart_FILL0_wght400_GRAD0_opsz48.png" alt="">`
+const btn4 = document.createElement('button')
+btn4.id = 'closeCarrito'
+btn4.innerHTML = `<p> Pagar </p>`
+btn4.addEventListener('click', () => {
+    location.href = 'pages/pay.html';
+})
+const btn5 = document.querySelector('#btn5')
+btn5.addEventListener('click', () => {
+    carritoContainer.classList.remove('carrito-container-active')
+})
+btn3.addEventListener('click', () => {
+    carritoContainer.classList.add('carrito-container-active')
+    valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio; }, 0);
+    carritoDiv.innerHTML = ` <h1> El valor total es $${valorTotal} </h1>
+                             <div> Los productos que selecionaste son: ${carrito.length}</div>
+                             `
+    carritoDiv.append(btn4)
+    carritoDiv.append(btn5)
+})
+sectionCarrito.append(btn3)
 
