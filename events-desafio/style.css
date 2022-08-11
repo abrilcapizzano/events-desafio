@@ -89,7 +89,7 @@ h2 {
 .cart {
   width: 60px; }
 
-#btn1 {
+#btnAgregar {
   margin: 10px;
   font-size: 16px;
   padding: 10px;
@@ -114,6 +114,7 @@ h2 {
   transition: all .3s ease-in-out; }
 
 #carrito {
+  flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -129,6 +130,13 @@ h2 {
   opacity: 1;
   visibility: visible; }
 
-#carritoList {
-  background-color: red;
-  color: black; }
+.lista-carrito {
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  list-style: none; }
+  .lista-carrito li {
+    padding: 8px;
+    font-size: 16px;
+    margin: 0px; }

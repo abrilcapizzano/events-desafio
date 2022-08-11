@@ -27,11 +27,11 @@ for (const producto of productos) {
                         <div> <img class="imagen" src = ${producto.img} alt = " "> </div>
                         <h2> $${producto.precio} </h2> `
     listaProductos.append(article)
-    const btn1 = document.createElement('button')
-    btn1.id = 'btn1'
-    btn1.innerHTML = `<p>Agregar producto</p>`
-    article.append(btn1)
-    btn1.addEventListener('click', () => {
+    const btnAgregar = document.createElement('button')
+    btnAgregar.id = 'btnAgregar'
+    btnAgregar.innerHTML = `<p>Agregar producto</p>`
+    article.append(btnAgregar)
+    btnAgregar.addEventListener('click', () => {
         modalContainer.classList.add('modal-container-active')
         carrito.push(producto)
         localStorage.setItem('carrito', JSON.stringify(carrito))
@@ -41,29 +41,31 @@ const sectionCarrito = document.querySelector('#cart-seccion')
 const carritoContainer = document.querySelector('#carrito-container')
 const carritoDiv = document.querySelector('#carrito')
 const carritoList = document.querySelector('#carritoList');
-const btn3 = document.createElement('button')
-btn3.id = 'openCarrito'
-btn3.innerHTML = `<img class="cart" src="./img/shopping_cart_FILL0_wght400_GRAD0_opsz48.png" alt="">`
-const btn4 = document.createElement('button')
-btn4.id = 'closeCarrito'
-btn4.innerHTML = `<p> Pagar </p>`
-btn4.addEventListener('click', () => {
+const btnCarrito = document.createElement('button')
+btnCarrito.id = 'openCarrito'
+btnCarrito.innerHTML = `<img class="cart" src="./img/shopping_cart_FILL0_wght400_GRAD0_opsz48.png" alt="">`
+const btnPagar = document.createElement('button')
+btnPagar.id = 'btnPay'
+btnPagar.innerHTML = `<p> Pagar </p>`
+btnPagar.addEventListener('click', () => {
     location.href = 'pages/pay.html';
 })
-const btn5 = document.querySelector('#btn5')
-btn5.addEventListener('click', () => {
+const btnSeguir = document.querySelector('#btnSeguir')
+btnSeguir.addEventListener('click', () => {
     carritoContainer.classList.remove('carrito-container-active')
 })
-btn3.addEventListener('click', () => {
+btnCarrito.addEventListener('click', () => {
     carritoContainer.classList.add('carrito-container-active')
     valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio; }, 0);
     carritoDiv.innerHTML = ` <h1> El valor total es $${valorTotal} </h1>
                              <div> Los productos que selecionaste son: ${carrito.length}</div>
                              `
                              for(const item of carrito){
-                                carritoDiv.innerHTML += `<p>${item.nombre}</p>`
+                                carritoDiv.innerHTML += `<ul class = "lista-carrito"> 
+                                <li class = "elemento-carrito">${item.nombre} $${item.precio}
+                                </ul>`
                               }
-    carritoDiv.append(btn4, btn5)
+    carritoDiv.append(btnPagar, btnSeguir)
 })
-sectionCarrito.append(btn3)
+sectionCarrito.append(btnCarrito)
 
