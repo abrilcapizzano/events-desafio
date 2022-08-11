@@ -60,8 +60,10 @@ btn3.addEventListener('click', () => {
     carritoDiv.innerHTML = ` <h1> El valor total es $${valorTotal} </h1>
                              <div> Los productos que selecionaste son: ${carrito.length}</div>
                              `
-    carritoDiv.append(btn4)
-    carritoDiv.append(btn5)
+                             for(const item of carrito){
+                                carritoDiv.innerHTML += `<p>${item.nombre}</p>`
+                              }
+    carritoDiv.append(btn4, btn5)
 })
 sectionCarrito.append(btn3)
 
